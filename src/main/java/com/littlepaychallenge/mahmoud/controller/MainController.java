@@ -3,7 +3,6 @@ package com.littlepaychallenge.mahmoud.controller;
 import java.util.ArrayList;
 
 import com.littlepaychallenge.mahmoud.model.Tap;
-import com.littlepaychallenge.mahmoud.service.FareService;
 import com.littlepaychallenge.mahmoud.service.FileService;
 
 public class MainController {
@@ -17,8 +16,6 @@ public class MainController {
     }
 
     private static ArrayList<Tap> readFile(){
-        FareService fareService = new FareService();
-        fareService.calculateFare();
         FileService fileService = new FileService();
 
         ArrayList<Tap> taps = fileService.readFile("taps.csv");
