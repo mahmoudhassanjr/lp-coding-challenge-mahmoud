@@ -69,6 +69,19 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib/</classpathPrefix>
+                <mainClass>com.littlepaychallenge.mahmoud.App</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+      </plugin>
       </plugins>
     </pluginManagement>
   </build>
