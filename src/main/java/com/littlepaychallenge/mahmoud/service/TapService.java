@@ -1,7 +1,10 @@
 package com.littlepaychallenge.mahmoud.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.littlepaychallenge.mahmoud.constants.Constants;
@@ -107,5 +110,22 @@ public class TapService {
         System.out.println("TRIP: " + newTrip);
 
         return newTrip;
+    }
+
+    public void getIncompleteTrips(HashMap<String, TreeMap<LocalDate, TravelHistoryRepository>> tapRepository,
+            TreeMap<String, Trip> tripRepository){
+                for (Entry<String, TreeMap<LocalDate, TravelHistoryRepository>> tap : tapRepository.entrySet()) {
+                    TreeMap<LocalDate, TravelHistoryRepository> history = tap.getValue();
+        
+                    for (TravelHistoryRepository travelRepository : history.values()) {
+                        if (travelRepository.getTripStatus().equalsIgnoreCase(TRIP_STATUSES.INCOMPLETE.toString())) {
+                            Tap mostRecentTap = travelRepository.getMostRecentTap();
+                            Trip incompleteTrip = buildIncompleteTrip(mostRecentTap, travelRepository);
+                            tripRepository.put(mostRecentTap.getDate().toString(), incompleteTrip);
+                        }
+                    }
+                }    
+         
+        System.out.println("Final Repository: " + tripRepository);
     }
 }

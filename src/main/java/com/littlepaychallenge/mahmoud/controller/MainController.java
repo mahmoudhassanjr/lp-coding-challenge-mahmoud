@@ -6,6 +6,8 @@ import com.littlepaychallenge.mahmoud.model.Tap;
 import com.littlepaychallenge.mahmoud.repository.TapRepository;
 import com.littlepaychallenge.mahmoud.repository.TripRepository;
 import com.littlepaychallenge.mahmoud.service.FileService;
+import com.littlepaychallenge.mahmoud.service.TapService;
+
 import java.util.TreeMap;
 import java.time.LocalDate;
 import com.littlepaychallenge.mahmoud.repository.TravelHistoryRepository;
@@ -13,6 +15,7 @@ import com.littlepaychallenge.mahmoud.model.Trip;
 
 public class MainController {
     private static FileService fileService = new FileService();
+    private static TapService tapService = new TapService();
     private static TapRepository tapRepository = new TapRepository();
     private static TripRepository tripRepository = new TripRepository();
     
@@ -36,6 +39,7 @@ public class MainController {
             dateMap.put(tap.getDate(), travelHistoryRepository);
             tapRepository.addToTapRepository(tap, dateMap);
             displayTaps();
+            tapService.getIncompleteTrips(tapRepository.getTapRepository(), tripRepository.getTripRepository());
         }
     }
 
