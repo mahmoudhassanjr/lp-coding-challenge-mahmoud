@@ -17,6 +17,7 @@ import com.littlepaychallenge.mahmoud.utils.DateUtils;
 
 public class TapService {
     private FareService fareService = new FareService();
+    private FileService fileService = new FileService();
     private DateUtils dateUtils = new DateUtils();
 
     public boolean checkTapOff(Tap currentTap, TravelHistoryRepository travelHistoryRepository) {
@@ -126,6 +127,6 @@ public class TapService {
                     }
                 }    
          
-        System.out.println("Final Repository: " + tripRepository);
+        fileService.writeToFile(tripRepository, "output.csv"); //Final output written to file.
     }
 }

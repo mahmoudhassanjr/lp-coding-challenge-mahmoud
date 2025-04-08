@@ -21,7 +21,6 @@ public class MainController {
     
     public static void initiateTapProcessing(){
         ArrayList<Tap> taps = readFile();
-        System.out.println("TAPS SIZE: " + taps.size());
 
         for(Tap tap : taps){
             System.out.println("Tap: " + tap.toString());
@@ -38,6 +37,7 @@ public class MainController {
             
             dateMap.put(tap.getDate(), travelHistoryRepository);
             tapRepository.addToTapRepository(tap, dateMap);
+
             displayTaps();
             tapService.getIncompleteTrips(tapRepository.getTapRepository(), tripRepository.getTripRepository());
         }

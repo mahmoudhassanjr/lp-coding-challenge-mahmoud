@@ -1,13 +1,19 @@
 package com.littlepaychallenge.mahmoud.service;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
+import com.littlepaychallenge.mahmoud.constants.Constants;
 import com.littlepaychallenge.mahmoud.model.Tap;
+import com.littlepaychallenge.mahmoud.model.Trip;
 
 public class FileService {
 
@@ -47,5 +53,26 @@ public class FileService {
         }
 
         return taps;
+    }
+
+    public void writeToFile(TreeMap<String, Trip> tripRepository, String fileName) {
+        try {
+            String path = "src/main/resources/files/output/" + fileName;
+            String headers = Constants.OUTPUT_FILE_HEADERS;
+            
+            File file = new File(path);
+            
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(headers);
+                
+                for (Trip trip : tripRepository.values()) {
+                    writer.write(trip.toString());
+                }
+                writer.flush();
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
     }
 }
