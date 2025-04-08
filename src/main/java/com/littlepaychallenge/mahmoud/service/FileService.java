@@ -61,6 +61,8 @@ public class FileService {
             String headers = Constants.OUTPUT_FILE_HEADERS;
             
             File file = new File(path);
+            boolean dirsCreated = file.getParentFile().mkdirs();
+            System.out.println(dirsCreated);
             
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(headers);
