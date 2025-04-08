@@ -63,12 +63,16 @@ public class FileService {
             File file = new File(path);
             boolean dirsCreated = file.getParentFile().mkdirs();
             System.out.println(dirsCreated);
+
+            System.out.print("\n======== FINAL OUTPUT FILE (found at src/main/resources/files/output/output.csv) ========");
             
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(headers);
                 
                 for (Trip trip : tripRepository.values()) {
-                    writer.write(trip.toString());
+                    String stringLine = trip.toString();
+                    System.out.print(stringLine);
+                    writer.write(stringLine);
                 }
                 writer.flush();
             }
