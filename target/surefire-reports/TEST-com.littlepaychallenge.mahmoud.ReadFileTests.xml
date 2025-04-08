@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.05" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.029" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="AU"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire/surefirebooter2306192627071413769.jar /Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire 2025-04-09T02-56-35_971-jvmRun1 surefire11687178530383996267tmp surefire_015582037536159407917tmp"/>
+    <property name="sun.java.command" value="/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire/surefirebooter12326410031489240123.jar /Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire 2025-04-09T03-28-34_170-jvmRun1 surefire16121773751587223423tmp surefire_0506813151032216355tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/test-classes:/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/classes:/Users/mahmoudhassanjr/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/mahmoudhassanjr/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire/surefirebooter2306192627071413769.jar"/>
+    <property name="surefire.real.class.path" value="/Users/mahmoudhassanjr/Documents/littlepay-challenge-mahmoud/maven-littlepay-tap-processor/tapprocessor/target/surefire/surefirebooter12326410031489240123.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23"/>
@@ -58,10 +58,10 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="readFileWithLargeNumberOfTaps" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.049"/>
-  <testcase name="readFileOfSixTaps" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.001"/>
+  <testcase name="readFileWithLargeNumberOfTaps" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.026"/>
+  <testcase name="readFileOfSixTaps" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0"/>
   <testcase name="readFileWithHeaderOnly" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0"/>
-  <testcase name="readFileWithInvalidFileName" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0"/>
+  <testcase name="readFileWithInvalidFileName" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.001"/>
   <testcase name="readEmptyFile" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0"/>
-  <testcase name="readFileWithSingleTap" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0"/>
+  <testcase name="readFileWithSingleTap" classname="com.littlepaychallenge.mahmoud.ReadFileTests" time="0.002"/>
 </testsuite>
