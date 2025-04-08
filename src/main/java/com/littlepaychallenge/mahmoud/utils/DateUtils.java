@@ -18,4 +18,8 @@ public class DateUtils {
         System.out.println("PROCESSED TIME: " + processedDateTime);
         return processedDateTime;
     }
+
+    public String dateToProcessedString(LocalDateTime date){
+        return date.toString().replace("T", " "); //Removes the default timestamp 'T' to more closely match the example output from the spec document.
+    }
 }

@@ -1,13 +1,16 @@
-package com.littlepaychallenge.mahmoud.model;
+package com.littlepaychallenge.mahmoud.repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 
 import com.littlepaychallenge.mahmoud.constants.Constants;
+import com.littlepaychallenge.mahmoud.model.Tap;
+import com.littlepaychallenge.mahmoud.model.Trip;
 import com.littlepaychallenge.mahmoud.service.FareService;
+import com.littlepaychallenge.mahmoud.service.TapService;
 
-public class TravelHistory {
+public class TravelHistoryRepository {
     private String pan;
     private LocalDate date;
     private TreeMap<LocalDateTime, Tap> tapRecords;
@@ -19,8 +22,9 @@ public class TravelHistory {
     private String tripStatus;
 
     private FareService fareService;
+    private TapService tapService;
 
-    public TravelHistory(String pan, LocalDate date) {
+    public TravelHistoryRepository(String pan, LocalDate date) {
         this.pan = pan;
         this.date = date;
         this.tapRecords = new TreeMap<LocalDateTime, Tap>();
@@ -31,8 +35,21 @@ public class TravelHistory {
         this.tripStatus = Constants.TRIP_STATUSES.INCOMPLETE.toString();
 
         this.fareService = new FareService();
+        this.tapService = new TapService();
     }
 
+    public void addToTapRecords(Tap tap) {
+        LocalDateTime tapTime = tap.getDateTimeUTC();
+
+        tapRecords.put(tapTime, tap); //A tap for that particular time is added to the tree map
+        this.mostRecentTap = tap; //The most recent tap is tracked for computationally efficient lookup
+
+        if (tapService.checkTapOff(tap, this)) {
+            System.out.println("---- TAPPED OFF ----");
+        }
+    }
+
+    //Calls the fare service to calculate the fare between two taps
     public double calculateFare(Tap previousTap, Tap currentTap){
         return fareService.calculateFare(previousTap, currentTap);
     }   
@@ -69,7 +86,32 @@ public class TravelHistory {
         return this.tripIncomplete;
     }
 
+    public void setCancelledTrip(boolean isCancelled){
+        this.tripCancelled = isCancelled;
+    }
+
+    public void setCompleteTrip(boolean isComplete){
+        this.tripComplete = isComplete;
+    }
+
+    public void setIncompleteTrip(boolean isIncomplete){
+        this.tripIncomplete = isIncomplete;
+    }
+
+    public void setTripStatus(String status){
+        this.setTripStatus(status);
+    }
+
+    public void setTrip(Trip trip){
+        this.setTrip(trip);
+    }
+
     public String getTripStatus() {
         return this.tripStatus;
+    }
+
+    @Override
+    public String toString() {
+        return this.pan + " " + this.date + " " + this.tapRecords.toString();
     }
 }

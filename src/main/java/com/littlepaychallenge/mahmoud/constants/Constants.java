@@ -2,7 +2,11 @@ package com.littlepaychallenge.mahmoud.constants;
 
 public class Constants {
     public enum TRIP_STATUSES{
-        CANCELLED, COMPLETED, INCOMPLETE
+        CANCELLED, COMPLETED, INCOMPLETE;
+    }
+
+    public enum TAP_TYPES{
+        OFF, ON;
     }
 
     public static final double LOW_FARE = 3.25;
