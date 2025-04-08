@@ -23,7 +23,6 @@ public class MainController {
         ArrayList<Tap> taps = readFile();
 
         for(Tap tap : taps){
-            System.out.println("Tap: " + tap.toString());
             TreeMap<LocalDate, TravelHistoryRepository> dateMap = tapRepository.fetchFromTapRepository(tap); //Retrieves taps from a specific date
             TravelHistoryRepository travelHistoryRepository = dateMap.getOrDefault(tap.getDate(), new TravelHistoryRepository(tap.getPan(), tap.getDate()));
             travelHistoryRepository.addToTapRecords(tap);
@@ -38,9 +37,10 @@ public class MainController {
             dateMap.put(tap.getDate(), travelHistoryRepository);
             tapRepository.addToTapRepository(tap, dateMap);
 
-            displayTaps();
-            tapService.getIncompleteTrips(tapRepository.getTapRepository(), tripRepository.getTripRepository());
+            
         }
+        displayTaps();
+        tapService.getIncompleteTrips(tapRepository.getTapRepository(), tripRepository.getTripRepository());
     }
 
     private static void displayTaps(){
