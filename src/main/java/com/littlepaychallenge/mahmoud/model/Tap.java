@@ -21,7 +21,7 @@ public class Tap implements Comparable<Tap> {
             String pan) {
 
         LocalDateTime convertedDate = dateUtils.processUTCDate(dateTimeUTC); //We convert the date from a string to make it easier to convert and process down the line (e.g. obtaining the durationSecs)
-        
+
         this.id = id;
         this.dateTimeUTC = convertedDate;
         this.tapType = tapType;
@@ -63,18 +63,18 @@ public class Tap implements Comparable<Tap> {
     @Override
     public String toString() {
         return "\nID: " + id
-                + "\nDateTimeUTC: "
+                + ",DateTimeUTC: "
                 + dateTimeUTC
-                + "\nTap Type: "
+                + ",Tap Type: "
                 + tapType
-                + "\nStop ID: "
+                + ",Stop ID: "
                 + stopId
-                + "\nCompany ID: "
+                + ",Company ID: "
                 + companyId
-                + "\nBus ID: "
+                + ",Bus ID: "
                 + busId
-                + "\nPAN: "
-                + pan;
+                + ",PAN: "
+                + pan + "\n";
     }
 
     @Override

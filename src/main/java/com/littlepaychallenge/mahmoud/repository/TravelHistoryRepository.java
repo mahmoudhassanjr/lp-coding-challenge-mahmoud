@@ -99,11 +99,11 @@ public class TravelHistoryRepository {
     }
 
     public void setTripStatus(String status){
-        this.setTripStatus(status);
+        this.tripStatus = status;
     }
 
     public void setTrip(Trip trip){
-        this.setTrip(trip);
+        this.trip = trip;
     }
 
     public String getTripStatus() {

@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import com.littlepaychallenge.mahmoud.model.Tap;
 
 public class TapRepository {
-    private HashMap<String, TreeMap<LocalDate, TravelHistoryRepository>> tapRepository;
+    public HashMap<String, TreeMap<LocalDate, TravelHistoryRepository>> tapRepository;
 
     public TapRepository(){
         this.tapRepository = new HashMap<>();

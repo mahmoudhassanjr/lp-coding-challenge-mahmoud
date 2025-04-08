@@ -1,8 +1,6 @@
 package com.littlepaychallenge.mahmoud.repository;
 
 import java.util.TreeMap;
-
-import com.littlepaychallenge.mahmoud.model.Tap;
 import com.littlepaychallenge.mahmoud.model.Trip;
 
 public class TripRepository {

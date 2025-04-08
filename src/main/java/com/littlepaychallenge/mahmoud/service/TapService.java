@@ -19,43 +19,46 @@ public class TapService {
     public boolean checkTapOff(Tap currentTap, TravelHistoryRepository travelHistoryRepository) {
         boolean isTapOff = false;
         TreeMap<LocalDateTime, Tap> tapRecords = travelHistoryRepository.getTapRecords(); //All the taps for a given PAN at a specific date
+        int travelHistoryRepositorySize = travelHistoryRepository.getTapRecords().size();
 
-        Tap previousTap = (Tap) tapRecords.values().toArray()[tapRecords.size() - 2]; //Gets the last tap before the one that's currently being processed
-        String previousTapType = previousTap.getTapType();
-        String currentTapType = currentTap.getTapType();
+        if(travelHistoryRepositorySize >= 2){
+                Tap previousTap = (Tap) tapRecords.values().toArray()[tapRecords.size() - 2]; //Gets the last tap before the one that's currently being processed
+                String previousTapType = previousTap.getTapType();
+                String currentTapType = currentTap.getTapType();
 
-        //Checks if a tap on has a corresponding tap off. This is by checking if the previous tap is 'ON' and the current tap is 'OFF'
-        //Key assumptions being made here are that (1) a user can only be in 1 bus between 2 taps and (2) The intersection of BusID/Tap date/A corresponding tap off is the only instance in which a trip is completed
-        //Another major assumption is that, similar to the Myki system here in Victoria, once a trip is completed, the daily fare will be capped to that completed trip so there will not be a need to process multiple completed trips as subsequent trips aren't counted in the daily total
-        boolean hasCorrespondingTap = previousTapType.equalsIgnoreCase(TAP_TYPES.ON.toString())
-                && currentTapType.equalsIgnoreCase(TAP_TYPES.OFF.toString())
-                && currentTap.getBusId().equals(previousTap.getBusId());
+                //Checks if a tap on has a corresponding tap off. This is by checking if the previous tap is 'ON' and the current tap is 'OFF'
+                //Key assumptions being made here are that (1) a user can only be in 1 bus between 2 taps and (2) The intersection of BusID/Tap date/A corresponding tap off is the only instance in which a trip is completed
+                //Another major assumption is that, similar to the Myki system here in Victoria, once a trip is completed, the daily fare will be capped to that completed trip so there will not be a need to process multiple completed trips as subsequent trips aren't counted in the daily total
+                boolean hasCorrespondingTap = previousTapType.equalsIgnoreCase(TAP_TYPES.ON.toString())
+                        && currentTapType.equalsIgnoreCase(TAP_TYPES.OFF.toString())
+                        && currentTap.getBusId().equals(previousTap.getBusId());
 
-        if (hasCorrespondingTap) {
-            isTapOff = true;
+                if (hasCorrespondingTap) {
+                    isTapOff = true;
 
-            //Checks for a cancelled trip if a user taps off at the same stop.
-            if (previousTap.getStopId().equalsIgnoreCase(currentTap.getStopId())) {
-                travelHistoryRepository.setCancelledTrip(true);
-                travelHistoryRepository.setTripStatus(TRIP_STATUSES.CANCELLED.toString());
+                    //Checks for a cancelled trip if a user taps off at the same stop.
+                    if (previousTap.getStopId().equalsIgnoreCase(currentTap.getStopId())) {
+                        travelHistoryRepository.setCancelledTrip(true);
+                        travelHistoryRepository.setTripStatus(TRIP_STATUSES.CANCELLED.toString());
 
-                double fare = fareService.calculateFare(previousTap, currentTap);
-                System.out.println("\nFARE: " + fare + "\n");
+                        double fare = fareService.calculateFare(previousTap, currentTap);
+                        System.out.println("\nFARE: " + fare + "\n");
 
-                createTrip(currentTap, previousTap, fare, travelHistoryRepository);
+                        createTrip(currentTap, previousTap, fare, travelHistoryRepository);
+                    } else {
+                        travelHistoryRepository.setCompleteTrip(true);
+                        travelHistoryRepository.setTripStatus(TRIP_STATUSES.COMPLETED.toString());
+
+                        System.out.println("---TRIP COMPLETED---");
+                        double fare = fareService.calculateFare(previousTap, currentTap);
+                        System.out.println("\nFARE: " + fare + "\n");
+
+                        createTrip(currentTap, previousTap, fare, travelHistoryRepository); //Trip marked as complete since the taps were at different stops but in the same bus on the same date
+                    }
+                }
             } else {
-                travelHistoryRepository.setCompleteTrip(true);
-                travelHistoryRepository.setTripStatus(TRIP_STATUSES.COMPLETED.toString());
-
-                System.out.println("---TRIP COMPLETED---");
-                double fare = fareService.calculateFare(previousTap, currentTap);
-                System.out.println("\nFARE: " + fare + "\n");
-
-                createTrip(currentTap, previousTap, fare, travelHistoryRepository); //Trip marked as complete since the taps were at different stops but in the same bus on the same date
+                return isTapOff;
             }
-        } else {
-            return isTapOff;
-        }
 
         return isTapOff;
     }
