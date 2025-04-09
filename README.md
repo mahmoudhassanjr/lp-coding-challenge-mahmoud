@@ -42,13 +42,14 @@ The **MainController** acts as the central dispatching point that’s instantiat
 
 The **Services** handle the tapping, IO, and fare calculation functions. The **Models** act as data-representation objects for **Trips**, **Taps**, and **Stops.** The Repositories act as the primary locations to hold **Trip**, **Tap**, and **Travel History** information. **TravelHistoryRepository** holds information about the taps that were made on that date. The collection of these taps allows for the updating of trip information by the TravelHistoryRepository every time a new tap is read. Though useful, I do think that this particular component is doing too much and could be split up into more modular chunks.  
 
-![](littlepay-treemap.png) 
+![](littlepay-treemap-updated.png) 
 A lot of the code uses TreeMaps for the insertion and retrieval of tap information. This allows us to efficiently build up a performant solution due to the **O(log n)** insertions and retrievals. Though there are still many opportunities for more speedups due to the occasional re-reading of data, I attempted to build up more information through only a few passes of the data. The tradeoff here was some of the code ended up being more convoluted than I would’ve liked but there’s always an opportunity to improve things further.
 
 **Tests**  
-The repository also includes a collection of tests that cover the majority of tests. One area of improvement here is that I should have gone deeper into the repository tests but time didn’t allow for it this time, unfortunately.  
+The repository also includes a collection of tests that cover the majority of functions. One area of improvement here is that I should have gone deeper into the repository tests but time didn’t allow for it this time, unfortunately.  
 The tests can be run using mvn test**.** 
 
+![](littlepay-tests.png) 
 
 **Areas of Improvement**
 
