@@ -68,10 +68,10 @@ public class TapService {
     }
 
     //Creates a trip based on the tap and fare data
-    private void createTrip(Tap startTap, Tap endTap, double fare, TravelHistoryRepository travelHistoryRepository) {
-        LocalDateTime started = startTap.getDateTimeUTC();
+    private void createTrip(Tap endTap, Tap startTap, double fare, TravelHistoryRepository travelHistoryRepository) {
         LocalDateTime finished = endTap.getDateTimeUTC();
-        long durationSecs = ChronoUnit.SECONDS.between(finished, started);
+        LocalDateTime started = startTap.getDateTimeUTC();
+        long durationSecs = ChronoUnit.SECONDS.between(started, finished);
 
         String fromStopId = startTap.getStopId();
         String toStopId = endTap.getStopId();

@@ -22,7 +22,7 @@ public class TapServiceTests {
 
         Trip completedTrip = travelHistoryRepository.getTrip();
 
-        String expected = "\n2023-01-22 13:05,2023-01-22 13:00,300,Stop2,Stop1,$3.25,Company 1,Bus37,5500005555555559,COMPLETED";
+        String expected = "\n2023-01-22 13:00,2023-01-22 13:05,300,Stop1,Stop2,$3.25,Company 1,Bus37,5500005555555559,COMPLETED";
 
         assertEquals(expected, completedTrip.toString());
     }
@@ -38,7 +38,7 @@ public class TapServiceTests {
 
         Trip completedTrip = travelHistoryRepository.getTrip();
 
-        String expected = "\n2023-01-22 13:05,2023-01-22 13:00,300,Stop1,Stop1,$0.0,Company 1,Bus37,5500005555555559,CANCELLED";
+        String expected = "\n2023-01-22 13:00,2023-01-22 13:05,300,Stop1,Stop1,$0.0,Company 1,Bus37,5500005555555559,CANCELLED";
 
         assertEquals(expected, completedTrip.toString());
     }
